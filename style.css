@@ -31,19 +31,19 @@ body {
 
 .line1 {
     fill: none;
-    stroke: #ffab00;
+    stroke: #2c7bb6;
     stroke-width: 3;
 }
 
 .line2 {
     fill: none;
-    stroke: #501cdf;
+    stroke: #fdae61;
     stroke-width: 3;
 }
 
 .line3 {
     fill: none;
-    stroke: #16e042;
+    stroke: #d7191c;
     stroke-width: 3;
 }
 

@@ -251,13 +251,13 @@ function draw_diagram(data, fisheye) {
         let color;
         switch (i) {
           case 0:
-            color = "#ffab00";
+            color = "#2c7bb6";
             break;
           case 1:
-            color = "#501cdf";
+            color = "#fdae61";
             break;
           case 2:
-            color = "#16e042";
+            color = "#d7191c";
             break;
         }
         return color;
