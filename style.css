@@ -1,0 +1,86 @@
+body {
+    font: 11px sans-serif;
+    height: 97vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#chart{
+    display: flex;
+    width: 98%;
+    height: 89vh;
+    justify-content: center;
+    align-items: center;
+}
+.choix{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 20px;
+    font-size: 14px;
+    font-weight: normal;
+}
+.zoom {
+    cursor: move;
+    fill: none;
+    pointer-events: all;
+    overflow: hidden;
+}
+
+.line1 {
+    fill: none;
+    stroke: #ffab00;
+    stroke-width: 3;
+}
+
+.line2 {
+    fill: none;
+    stroke: #501cdf;
+    stroke-width: 3;
+}
+
+.line3 {
+    fill: none;
+    stroke: #16e042;
+    stroke-width: 3;
+}
+
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+
+
+.context .line {
+    stroke-width: 0.5px;
+}
+
+.brush .extent {
+    stroke: #fff;
+    fill-opacity: .125;
+    shape-rendering: crispEdges;
+}
+
+.line.highlight {
+    fill-opacity: 1;
+    stroke-opacity: 1;
+}
+
+.focus .line.highlight {
+    stroke-width: 3;
+}
+
+.context .line.highlight {
+    stroke-width: 1.0;
+}
+
+.line.fadeout {
+    fill-opacity: 0.2;
+    stroke-opacity: 0.2;
+}
