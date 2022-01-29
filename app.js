@@ -9,7 +9,7 @@ document.getElementById("reel").addEventListener("click", function (event) {
 });
 
 document.getElementById("fish").addEventListener("click", function (event) {
-  var data = get_data(document.getElementById("alea").checked? 1:2);
+  var data = get_data(document.getElementById("alea").checked ? 1 : 2);
   draw_diagram(data, document.getElementById("fish").checked);
 });
 
@@ -188,21 +188,21 @@ function draw_diagram(data, fisheye) {
     context.select(".brush").call(brush.move, x.range().map(t.invertX, t));
   }
 
-  function mouseover(name) {
-    switch (name) {
-      case "Gold":
+  function mouseover(name, i) {
+    switch (i) {
+      case 0:
         d3.selectAll("path.line").classed("fadeout", true);
         d3.selectAll("path.line1")
           .classed("highlight", true)
           .classed("fadeout", false);
         break;
-      case "Nhem":
+      case 1:
         d3.selectAll("path.line").classed("fadeout", true);
         d3.selectAll("path.line2")
           .classed("highlight", true)
           .classed("fadeout", false);
         break;
-      case "Shem":
+      case 2:
         d3.selectAll("path.line").classed("fadeout", true);
         d3.selectAll("path.line3")
           .classed("highlight", true)
@@ -238,8 +238,8 @@ function draw_diagram(data, fisheye) {
         return "translate(0," + i * 18 + ")";
       })
       .attr("class", "legend" + i + "")
-      .on("mouseover", mouseover)
-      .on("touchstart", mouseover)
+      .on("mouseover", (d) => mouseover(d, i))
+      .on("touchstart", (d) => mouseover(d, i))
       .on("mouseout", mouseout)
       .on("touchend", mouseout);
 
@@ -271,71 +271,71 @@ function draw_diagram(data, fisheye) {
         return d;
       });
   });
-  if (fisheye){
-      var fisheye = d3.fisheye.circular().radius(200).distortion(2);
+  if (fisheye) {
+    var fisheye = d3.fisheye.circular().radius(200).distortion(2);
 
-      svg.on("mousemove", function () {
-        fisheye.focus(d3.mouse(this));
+    svg.on("mousemove", function () {
+      fisheye.focus(d3.mouse(this));
+    });
+
+    svg.on("mousemove", function () {
+      fisheye.focus(d3.mouse(this));
+
+      path1.attr("d", function (d) {
+        let line1 = line(d).split(",");
+        line1.slice(1, line1.length).forEach(function (p, i) {
+          let x_y = p.split("L");
+          let x_y_fish = fisheye({
+            x: parseFloat(x_y[1]),
+            y: parseFloat(x_y[0]),
+          });
+          x_y = [x_y_fish.y.toString(), x_y_fish.x.toString()].join("L");
+          if (i == line1.length - 2) {
+            x_y = x_y_fish.x.toString();
+          }
+          line1[i + 1] = x_y;
+        });
+        line1 = line1.join(",");
+        return line1;
       });
 
-      svg.on("mousemove", function () {
-        fisheye.focus(d3.mouse(this));
-
-        path1.attr("d", function (d) {
-          let line1 = line(d).split(",");
-          line1.slice(1, line1.length).forEach(function (p, i) {
-            let x_y = p.split("L");
-            let x_y_fish = fisheye({
-              x: parseFloat(x_y[1]),
-              y: parseFloat(x_y[0]),
-            });
-            x_y = [x_y_fish.y.toString(), x_y_fish.x.toString()].join("L");
-            if (i == line1.length - 2) {
-              x_y = x_y_fish.x.toString();
-            }
-            line1[i + 1] = x_y;
+      path2.attr("d", function (d) {
+        let line1 = line(d).split(",");
+        line1.slice(1, line1.length).forEach(function (p, i) {
+          let x_y = p.split("L");
+          let x_y_fish = fisheye({
+            x: parseFloat(x_y[1]),
+            y: parseFloat(x_y[0]),
           });
-          line1 = line1.join(",");
-          return line1;
+          x_y = [x_y_fish.y.toString(), x_y_fish.x.toString()].join("L");
+          if (i == line1.length - 2) {
+            x_y = x_y_fish.x.toString();
+          }
+          line1[i + 1] = x_y;
         });
-
-        path2.attr("d", function (d) {
-          let line1 = line(d).split(",");
-          line1.slice(1, line1.length).forEach(function (p, i) {
-            let x_y = p.split("L");
-            let x_y_fish = fisheye({
-              x: parseFloat(x_y[1]),
-              y: parseFloat(x_y[0]),
-            });
-            x_y = [x_y_fish.y.toString(), x_y_fish.x.toString()].join("L");
-            if (i == line1.length - 2) {
-              x_y = x_y_fish.x.toString();
-            }
-            line1[i + 1] = x_y;
-          });
-          line1 = line1.join(",");
-          console.log(line1);
-          return line1;
-        });
-
-        path3.attr("d", function (d) {
-          let line1 = line(d).split(",");
-          line1.slice(1, line1.length).forEach(function (p, i) {
-            let x_y = p.split("L");
-            let x_y_fish = fisheye({
-              x: parseFloat(x_y[1]),
-              y: parseFloat(x_y[0]),
-            });
-            x_y = [x_y_fish.y.toString(), x_y_fish.x.toString()].join("L");
-            if (i == line1.length - 2) {
-              x_y = x_y_fish.x.toString();
-            }
-            line1[i + 1] = x_y;
-          });
-          line1 = line1.join(",");
-          return line1;
-        });
+        line1 = line1.join(",");
+        console.log(line1);
+        return line1;
       });
+
+      path3.attr("d", function (d) {
+        let line1 = line(d).split(",");
+        line1.slice(1, line1.length).forEach(function (p, i) {
+          let x_y = p.split("L");
+          let x_y_fish = fisheye({
+            x: parseFloat(x_y[1]),
+            y: parseFloat(x_y[0]),
+          });
+          x_y = [x_y_fish.y.toString(), x_y_fish.x.toString()].join("L");
+          if (i == line1.length - 2) {
+            x_y = x_y_fish.x.toString();
+          }
+          line1[i + 1] = x_y;
+        });
+        line1 = line1.join(",");
+        return line1;
+      });
+    });
   }
 }
 
